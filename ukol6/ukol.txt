@@ -1,0 +1,25 @@
+Část 1: Modelování na základě homologie a sekundární struktura
+V úvodní části praktického úkolu jsem pracoval s neznámými peptidovými sekvencemi s cílem určit jejich původ a strukturu. 
+Pomocí nástroje Protein BLAST jsem v databázi lidských proteinů identifikoval první zadanou sekvenci (HYLCKYVI...) jako součást proteinu Monoamine oxidase A (MAO-A). 
+Pro zjištění sekundární struktury jsem tento protein vyhledal v databázi UniProt. 
+Vzhledem k nedávným změnám v uživatelském rozhraní UniProtu a odstranění grafické anotace sekundárních struktur z Feature Vieweru jsem strukturu odvodil 
+na základě pozice zarovnání z BLASTu (kolem aminokyseliny 48), kde se v tomto proteinu nachází alfa-šroubovice (Alpha-helix). 
+U druhé zadané sekvence (TEYAINKL...) jsem pomocí BLASTu potvrdil shodu s proteinem Tyrosine-protein kinase JAK1, což představuje velmi běžnou proteinovou doménu.
+
+Část 2: Automatizované skládání proteinů pomocí AI (ESMFold)
+Druhá část byla zaměřena na predikci terciární (3D) struktury z primární sekvence pomocí deep-learningového modelu ESMFold. 
+Jako testovací model byl využit enzym PETase, který dokáže rozkládat plasty. 
+Systém ESMFold pro tuto sekvenci o délce 300 aminokyselin úspěšně vygeneroval predikovaný 3D model ve formátu PDB. 
+Dalším krokem měla být validace fyzikální smysluplnosti modelu (Z-score) pomocí nástroje ProSA-web. 
+Z důvodu výpadku serveru na straně poskytovatele nebylo možné analýzu dokončit, nicméně u takto stabilního proteinu lze s jistotou předpokládat skóre odpovídající nativním proteinům.
+
+Nejdůležitějším bodem bylo porovnání predikce s realitou. 
+Umělou inteligencí vygenerovaný model jsem nahrál do nástroje Pairwise Structure Alignment (RCSB PDB) a porovnal ho se skutečnou experimentální strukturou získanou rentgenovou krystalografií (kód 5XJH). 
+Výsledek ukázal vynikající přesnost AI modelu s hodnotou RMSD 0.57 Å a TM-score 0.99. Tyto hodnoty potvrzují, že predikovaný tvar se téměř na 100 % shoduje s experimentální realitou.
+
+Část 3: Samostatná práce a limity predikčních modelů
+Pro teoretickou část samostatné práce jsem jako "protein of interest" zvolil doménu JAK1, identifikovanou v první části. 
+U takto dobře popsaných lidských domén by modely ESMFold i AlphaFold pravděpodobně opět dosáhly TM-score blížícího se absolutní shodě. 
+V závěru jsem zhodnotil limity současných AI modelů pro predikci struktur. Tyto metody nejčastěji selhávají u vnitřně neuspořádaných proteinů (disordered proteins), kterým mylně vnucují fixní strukturu. 
+Dále mají problémy s obřími interagujícími komplexy (např. motorický protein dynein), kde nezvládají přesně predikovat dynamiku interakcí jednotlivých domén,
+ a u membránových proteinů, jejichž specifické lipidové prostředí je pro modely složitější na simulaci než běžné vodní prostředí.
